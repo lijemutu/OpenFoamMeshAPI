@@ -5,6 +5,10 @@ import os
 from flask import make_response,jsonify
 app = Flask(__name__)
 
+@app.route("/",methods=["GET"])
+def sanity():
+    return "Ok"
+
 @app.route("/tutorials",methods =["GET"])
 def template_list():
     return make_response(jsonify(templates_available = os.listdir("examples")),200)
