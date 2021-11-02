@@ -15,7 +15,9 @@ def sanity():
 def template_list():
     blocked_extensions = (".py",".sh",".zip","openfoam-master-tutorials")
     list_of_files = [file for file in sorted(os.listdir("examples")) if not file.endswith(blocked_extensions)]
-    return make_response(jsonify(templates_available = list_of_files),200)
+    return make_response(jsonify(usage="Use any name below to access the file eg.\
+        /tutorials/pipe\n You can use query param download=1 to download the file eg.\
+        /tutorials/pipe?download=1",templates_available = list_of_files),200)
 
 @app.route("/tutorials/<string:name>",methods =["GET"])
 def templates(name):
