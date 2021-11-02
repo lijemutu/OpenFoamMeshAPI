@@ -13,7 +13,9 @@ def sanity():
 
 @app.route("/tutorials",methods =["GET"])
 def template_list():
-    return make_response(jsonify(templates_available = sorted(os.listdir("examples"))),200)
+    blocked_extensions = (".py",".sh",".zip","openfoam-master-tutorials")
+    list_of_files = [file for file in sorted(os.listdir("examples")) if not file.endswith(blocked_extensions)]
+    return make_response(jsonify(templates_available = list_of_files),200)
 
 @app.route("/tutorials/<string:name>",methods =["GET"])
 def templates(name):
